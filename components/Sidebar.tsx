@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: '📊' },
   { href: '/uretim', label: 'Günlük Üretim', icon: '⚙️' },
+  { href: '/makineler', label: 'Makine Performansı', icon: '🏭' },
   { href: '/hammadde', label: 'Hammadde', icon: '📦' },
   { href: '/stok', label: 'Ürün Stoku', icon: '🏗️' },
   { href: '/paletler', label: 'Palet Takibi', icon: '🎯' },
