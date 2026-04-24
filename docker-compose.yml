@@ -1,0 +1,7 @@
+services:
+  fabrika-panel:
+    build: .
+    container_name: fabrika-panel
+    ports:
+      - "3001:80"
+    restart: unless-stopped
