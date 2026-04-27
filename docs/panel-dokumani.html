@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enpack Plastik — Üretim İzlenebilirlik Sistemi Dokümanı</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #fff; font-size: 13px; line-height: 1.6; }
+
+    .cover {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 40px;
+      page-break-after: always;
+    }
+    .cover .logo { font-size: 72px; margin-bottom: 24px; }
+    .cover h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .cover h2 { font-size: 18px; font-weight: 400; opacity: 0.7; margin-bottom: 48px; }
+    .cover .meta { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 32px; opacity: 0.6; font-size: 12px; }
+    .cover .badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 6px 20px;
+      font-size: 12px;
+      margin-bottom: 48px;
+      display: inline-block;
+    }
+
+    .page { padding: 48px 56px; max-width: 900px; margin: 0 auto; }
+    .page-break { page-break-before: always; }
+
+    h1.section { font-size: 26px; font-weight: 700; color: #0f3460; border-bottom: 3px solid #0f3460; padding-bottom: 10px; margin-bottom: 28px; margin-top: 8px; }
+    h2.sub { font-size: 18px; font-weight: 600; color: #1a1a2e; margin-top: 32px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    h2.sub .icon { font-size: 20px; }
+    h3.field { font-size: 13px; font-weight: 600; color: #0f3460; margin-top: 16px; margin-bottom: 6px; }
+
+    p { margin-bottom: 10px; color: #333; }
+
+    .toc { background: #f8f9fa; border-radius: 10px; padding: 28px 32px; margin-bottom: 0; }
+    .toc h2 { font-size: 16px; font-weight: 700; color: #0f3460; margin-bottom: 16px; }
+    .toc-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dotted #ddd; }
+    .toc-item:last-child { border-bottom: none; }
+    .toc-item .title { font-weight: 500; color: #333; }
+    .toc-item .page-num { color: #999; font-size: 12px; }
+    .toc-section { font-size: 11px; font-weight: 700; color: #0f3460; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 12px; margin-bottom: 4px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; }
+    th { background: #0f3460; color: white; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; }
+    td { padding: 9px 14px; border-bottom: 1px solid #e8e8e8; font-size: 12px; vertical-align: top; }
+    tr:nth-child(even) td { background: #f8f9fa; }
+    tr:hover td { background: #f0f4ff; }
+
+    .badge-green { background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .badge-yellow { background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .badge-red { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .badge-blue { background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .badge-gray { background: #f3f4f6; color: #4b5563; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+
+    .info-box { background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 6px; padding: 14px 18px; margin: 16px 0; }
+    .info-box p { margin: 0; color: #1e40af; font-size: 12px; }
+    .warn-box { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 6px; padding: 14px 18px; margin: 16px 0; }
+    .warn-box p { margin: 0; color: #92400e; font-size: 12px; }
+
+    .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; padding: 16px 20px; background: #f8f9fa; border-radius: 8px; }
+    .flow-step { background: #0f3460; color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+    .flow-arrow { color: #9ca3af; font-size: 18px; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+    .card { background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 20px; }
+    .card h4 { font-size: 13px; font-weight: 700; color: #0f3460; margin-bottom: 8px; }
+    .card p { font-size: 12px; color: #555; margin: 0; }
+    .card ul { font-size: 12px; color: #555; padding-left: 16px; margin: 4px 0 0; }
+    .card li { margin-bottom: 3px; }
+
+    .login-box { background: #1a1a2e; color: white; border-radius: 10px; padding: 20px 24px; display: inline-block; margin: 12px 0; font-family: monospace; }
+    .login-box .field { color: #9ca3af; font-size: 11px; margin-bottom: 2px; }
+    .login-box .value { font-size: 14px; color: #60a5fa; }
+
+    .formula { background: #1e293b; color: #7dd3fc; font-family: monospace; font-size: 12px; padding: 10px 16px; border-radius: 6px; margin: 8px 0; display: block; }
+
+    .page-header { display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #0f3460, #1a1a2e); color: white; padding: 16px 24px; border-radius: 10px; margin-bottom: 24px; }
+    .page-header .icon { font-size: 28px; }
+    .page-header h3 { font-size: 16px; font-weight: 700; }
+    .page-header p { font-size: 11px; opacity: 0.7; margin: 0; }
+
+    footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 11px; color: #9ca3af; text-align: center; }
+
+    @media print {
+      body { font-size: 12px; }
+      .cover { min-height: 100vh; }
+      .page { padding: 36px 48px; }
+      .page-break { page-break-before: always; }
+      @page { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- KAPAK -->
+<div class="cover">
+  <div class="logo">🏭</div>
+  <div class="badge">v1.0 — Demo Sürümü</div>
+  <h1>Enpack Plastik</h1>
+  <h2>Üretim İzlenebilirlik Sistemi</h2>
+  <h2 style="font-size:14px; opacity:0.5;">Kullanım Kılavuzu & Teknik Doküman</h2>
+  <div class="meta">
+    <p>Hazırlanma Tarihi: Nisan 2026</p>
+    <p style="margin-top:6px;">Bu doküman demo sisteme aittir. Gerçek veriler ile güncellenecektir.</p>
+  </div>
+</div>
+
+<!-- İÇİNDEKİLER -->
+<div class="page">
+  <div class="toc">
+    <h2>📋 İçindekiler</h2>
+    <div class="toc-section">Genel Bilgiler</div>
+    <div class="toc-item"><span class="title">1. Sisteme Giriş</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">2. İzlenebilirlik Zinciri</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">3. Temel Kavramlar & Formüller</span><span class="page-num">—</span></div>
+    <div class="toc-section">Panel Sayfaları</div>
+    <div class="toc-item"><span class="title">4. Dashboard</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">5. Günlük Üretim</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">6. Makine Performansı</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">7. Hammadde Yönetimi</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">8. Ürün Stoku</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">9. Palet Takibi</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">10. Sevkiyat</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">11. Firma Analizi</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">12. Arıza & Duruş Takibi</span><span class="page-num">—</span></div>
+    <div class="toc-section">Teknik Bilgiler</div>
+    <div class="toc-item"><span class="title">13. Makine Listesi</span><span class="page-num">—</span></div>
+    <div class="toc-item"><span class="title">14. Ürün Kataloğu</span><span class="page-num">—</span></div>
+  </div>
+</div>
+
+<!-- BÖLÜM 1: GİRİŞ -->
+<div class="page page-break">
+  <h1 class="section">1. Sisteme Giriş</h1>
+
+  <p>Enpack Plastik Üretim İzlenebilirlik Sistemi, fabrikadaki tüm üretim süreçlerini — hammadde girişinden ürün sevkiyatına kadar — tek bir panel üzerinden takip etmeyi sağlar.</p>
+
+  <h2 class="sub"><span class="icon">🔐</span> Giriş Bilgileri</h2>
+  <div class="login-box">
+    <div class="field">Kullanıcı Adı</div>
+    <div class="value">admin</div>
+    <div class="field" style="margin-top:10px;">Şifre</div>
+    <div class="value">enpack2026</div>
+  </div>
+
+  <div class="warn-box">
+    <p>⚠️ Bu demo sistemde giriş bilgileri sabittir. Gerçek sistemde kullanıcı bazlı yetkilendirme ve şifreli kimlik doğrulama uygulanacaktır.</p>
+  </div>
+
+  <h2 class="sub"><span class="icon">🎯</span> Sistemin Amacı</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>İzlenebilirlik</h4>
+      <ul>
+        <li>Hangi lot hammadde, hangi makinede kullanıldı?</li>
+        <li>Hangi partiden kaç palet üretildi?</li>
+        <li>Hangi palet hangi firmaya sevk edildi?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Performans Takibi</h4>
+      <ul>
+        <li>Makine bazlı verimlilik analizi</li>
+        <li>Duruş nedenleri ve süreleri</li>
+        <li>Günlük/haftalık üretim trendleri</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Stok Yönetimi</h4>
+      <ul>
+        <li>Hammadde giriş/tüketim takibi</li>
+        <li>Kritik stok uyarıları</li>
+        <li>Ürün stok hareketleri</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Sevkiyat & Müşteri</h4>
+      <ul>
+        <li>İrsaliye bazlı sevkiyat takibi</li>
+        <li>Firma bazlı sipariş analizi</li>
+        <li>Ciro ve hacim raporları</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- BÖLÜM 2: İZLENEBİLİRLİK ZİNCİRİ -->
+<div class="page page-break">
+  <h1 class="section">2. İzlenebilirlik Zinciri</h1>
+
+  <p>Sistemin temel özelliği, bir ürün paletinin geçmişini baştan sona takip edebilmektir. Her adım bir öncekiyle ilişkilendirilir:</p>
+
+  <div class="flow">
+    <div class="flow-step">📦 Hammadde Girişi (Lot No)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">⚙️ Makineye Yükleme</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">🏭 Üretim (Parti No)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">🎯 Palet Oluşumu (Palet No)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">🚚 Sevkiyat (İrsaliye)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">🏢 Müşteri Firma</div>
+  </div>
+
+  <h2 class="sub"><span class="icon">🔢</span> Numara Yapısı</h2>
+  <table>
+    <tr><th>Numara Türü</th><th>Örnek</th><th>Açıklama</th></tr>
+    <tr><td><strong>Lot No</strong></td><td>APS-64801-69</td><td>Gelen hammadde çuvalının (FIBC big bag) benzersiz kimliği. Tedarikçi tarafından verilir.</td></tr>
+    <tr><td><strong>Parti No</strong></td><td>000665</td><td>Bir üretim partisinin numarası. Aynı partiden birden fazla palet çıkabilir.</td></tr>
+    <tr><td><strong>Palet No</strong></td><td>000665/21</td><td>Parti numarası / Palet sıra numarası. 000665 partisinin 21. paleti anlamına gelir.</td></tr>
+    <tr><td><strong>İrsaliye No</strong></td><td>IRŞ-2026-0412</td><td>Sevkiyat belgesi numarası. Her sevkiyat için benzersizdir.</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📋</span> Palet Tanıtım Etiketi</h2>
+  <p>Her palet üretildikten ve streç sarıldıktan sonra üzerine <strong>Palet Tanıtım Etiketi</strong> yapıştırılır. Etiket üzerinde şu bilgiler bulunur:</p>
+  <table>
+    <tr><th>Alan</th><th>Açıklama</th></tr>
+    <tr><td>Mamül Adı</td><td>Üretilen ürünün tam adı</td></tr>
+    <tr><td>Mamül Kodu</td><td>Ürün kodu (örn: MM00.0412)</td></tr>
+    <tr><td>Parti Numarası</td><td>Üretim parti numarası</td></tr>
+    <tr><td>Palet Adet Miktarı</td><td>Paletteki toplam şişe adedi</td></tr>
+    <tr><td>Tava İçi Adedi</td><td>Her tava/katmandaki şişe sayısı</td></tr>
+    <tr><td>Üretim Tarihi</td><td>Üretildiği tarih</td></tr>
+    <tr><td>Palet Numarası</td><td>Parti No / Sıra No (örn: 000665/21)</td></tr>
+    <tr><td>Firma Adı (opsiyonel)</td><td>Eğer müşteriye özel üretimse firma adı</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 3: TEMEL KAVRAMLAR -->
+<div class="page page-break">
+  <h1 class="section">3. Temel Kavramlar & Formüller</h1>
+
+  <h2 class="sub"><span class="icon">📖</span> Teknik Kavramlar</h2>
+  <table>
+    <tr><th>Kavram</th><th>Tanım</th><th>Birim</th></tr>
+    <tr><td><strong>Cycle (Çevrim Süresi)</strong></td><td>Makinenin bir üretim döngüsünü tamamlama süresi. Kalıbın kaç saniyede bir açılıp kapandığıdır.</td><td>saniye</td></tr>
+    <tr><td><strong>Göz (Kalıp Gözü)</strong></td><td>Kalıbın aynı anda kaç şişe ürettiği. 8 gözlü kalıp her cycle'da 8 şişe üretir.</td><td>adet</td></tr>
+    <tr><td><strong>Kapasite</strong></td><td>Teorik maksimum üretim miktarı. Duruş süreleri düşülerek hesaplanır.</td><td>adet/gün</td></tr>
+    <tr><td><strong>Üretim</strong></td><td>Gerçekte üretilen şişe adedi.</td><td>adet</td></tr>
+    <tr><td><strong>Verimlilik</strong></td><td>Gerçek üretimin teorik kapasiteye oranı.</td><td>%</td></tr>
+    <tr><td><strong>Duruş</strong></td><td>Makinenin arıza, kalıp değişimi, ayar vb. nedenlerle durduğu süre.</td><td>saat</td></tr>
+    <tr><td><strong>Gramaj</strong></td><td>Bir şişenin üretimi için kullanılan hammadde miktarı.</td><td>gram</td></tr>
+    <tr><td><strong>FIBC / Big Bag</strong></td><td>Hammaddenin geldiği büyük çuval. Genellikle 1.200 kg kapasitelidir.</td><td>—</td></tr>
+    <tr><td><strong>Lot No</strong></td><td>Hammadde çuvalının benzersiz takip numarası.</td><td>—</td></tr>
+    <tr><td><strong>Masterbatch</strong></td><td>Renkli şişe üretimi için PET granüle karıştırılan renk konsantresi.</td><td>—</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">🧮</span> Hesaplama Formülleri</h2>
+
+  <h3 class="field">Teorik Kapasite</h3>
+  <code class="formula">Kapasite = (3600 ÷ Cycle) × Göz × (Toplam Saat − Duruş Saat)</code>
+  <p style="font-size:12px; color:#666;">Örnek: Cycle=16.4 sn, Göz=8, Saat=24, Duruş=0 → (3600÷16.4) × 8 × 24 = 42.146 adet</p>
+
+  <h3 class="field">Verimlilik</h3>
+  <code class="formula">Verimlilik (%) = (Gerçek Üretim ÷ Teorik Kapasite) × 100</code>
+  <p style="font-size:12px; color:#666;">%100 üzeri: makine hedefin üstünde çalışıyor. %95 altı: dikkat gerektirir.</p>
+
+  <h3 class="field">Hammadde Tüketimi</h3>
+  <code class="formula">Hammadde (kg) = Üretim Adedi × Gramaj ÷ 1000</code>
+  <p style="font-size:12px; color:#666;">Örnek: 43.200 adet × 32 gram ÷ 1000 = 1.382,4 kg</p>
+
+  <h2 class="sub"><span class="icon">🚦</span> Verimlilik Renk Kodları</h2>
+  <table>
+    <tr><th>Renk</th><th>Değer</th><th>Anlam</th></tr>
+    <tr><td><span class="badge-green">Yeşil</span></td><td>%100 ve üzeri</td><td>Hedefin üstünde — mükemmel performans</td></tr>
+    <tr><td><span class="badge-yellow">Sarı</span></td><td>%95 – %99</td><td>Kabul edilebilir — takip gerektirir</td></tr>
+    <tr><td><span class="badge-red">Kırmızı</span></td><td>%95 altı</td><td>Dikkat — arıza veya ayar sorunu olabilir</td></tr>
+    <tr><td><span class="badge-gray">Gri</span></td><td>—</td><td>Üretim yok (sipariş yok veya duruyor)</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 4: DASHBOARD -->
+<div class="page page-break">
+  <h1 class="section">4. Dashboard</h1>
+  <div class="page-header">
+    <div class="icon">📊</div>
+    <div>
+      <h3>Dashboard — Genel Bakış</h3>
+      <p>Fabrikaya girişte ilk görünen ekran. O günün özetini gösterir.</p>
+    </div>
+  </div>
+
+  <p>Dashboard, fabrika yöneticisinin her sabah ilk bakacağı ekrandır. Günlük üretim durumunu, kritik uyarıları ve temel metrikleri özet olarak gösterir.</p>
+
+  <h2 class="sub"><span class="icon">🃏</span> KPI Kartları (Üst Satır)</h2>
+  <table>
+    <tr><th>Kart</th><th>Açıklama</th><th>Renk Mantığı</th></tr>
+    <tr><td><strong>Toplam Üretim</strong></td><td>O gün tüm hatlarda üretilen toplam şişe adedi</td><td>Mavi (sabit)</td></tr>
+    <tr><td><strong>Hammadde Tüketim</strong></td><td>O gün tüm hatlarda tüketilen toplam PET granül miktarı (kg)</td><td>Mor (sabit)</td></tr>
+    <tr><td><strong>Ort. Verimlilik</strong></td><td>Üretim yapan hatların verimlilik ortalaması</td><td>Yeşil ≥%95 / Sarı &lt;%95</td></tr>
+    <tr><td><strong>Toplam Duruş</strong></td><td>O gün tüm hatlardaki toplam duruş süresi (saat)</td><td>Yeşil ≤10 / Kırmızı &gt;10</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">🃏</span> KPI Kartları (Alt Satır)</h2>
+  <table>
+    <tr><th>Kart</th><th>Açıklama</th></tr>
+    <tr><td><strong>Bugün Sevkiyat</strong></td><td>O gün sevk edilen veya planlanan toplam ürün adedi</td></tr>
+    <tr><td><strong>Aktif Hat</strong></td><td>O gün fiilen üretim yapan hat sayısı (toplam 10 hat üzerinden)</td></tr>
+    <tr><td><strong>Kritik Stok</strong></td><td>Minimum stok eşiğinin altına düşen hammadde sayısı. Kırmızı ise sipariş gerekir.</td></tr>
+    <tr><td><strong>Haftalık Sevkiyat</strong></td><td>O haftaki toplam sevkiyat adedi</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📈</span> Grafikler</h2>
+  <table>
+    <tr><th>Grafik</th><th>Açıklama</th></tr>
+    <tr><td><strong>Günlük Üretim Trendi</strong></td><td>Son 3 günün toplam üretim karşılaştırması (çizgi grafik)</td></tr>
+    <tr><td><strong>Hat Bazlı Verimlilik</strong></td><td>O günkü her hattın verimlilik yüzdesi (bar grafik)</td></tr>
+    <tr><td><strong>Ürün Stok Durumu</strong></td><td>En çok üretilen ürünlerin anlık stok miktarları (yatay bar)</td></tr>
+    <tr><td><strong>Uyarılar & Bildirimler</strong></td><td>Kritik stok uyarıları, duruş bildirimleri, sevkiyat planı</td></tr>
+  </table>
+
+  <div class="info-box">
+    <p>💡 Dashboard'daki tüm veriler o günün tarihine göre otomatik filtrelenir. Tarih değiştiğinde veriler güncellenir.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 5: GÜNLÜK ÜRETİM -->
+<div class="page page-break">
+  <h1 class="section">5. Günlük Üretim</h1>
+  <div class="page-header">
+    <div class="icon">⚙️</div>
+    <div>
+      <h3>Günlük Üretim — Hat Bazlı Takip</h3>
+      <p>Her hattın o günkü üretim detaylarını gösterir.</p>
+    </div>
+  </div>
+
+  <p>Bu sayfa, fabrika şefinin her gün düzenli olarak kontrol ettiği üretim kayıt sayfasıdır. Hangi hat, hangi ürünü, ne kadar sürede, kaç adet üretti bilgisi buradan izlenir.</p>
+
+  <h2 class="sub"><span class="icon">📅</span> Tarih Filtresi</h2>
+  <p>Sayfanın sağ üstündeki butonlar ile farklı günlerin verileri görüntülenebilir. Demo sistemde 3 günlük veri mevcuttur (21–23 Nisan 2026).</p>
+
+  <h2 class="sub"><span class="icon">📋</span> Tablo Sütunları</h2>
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>Makine</strong></td><td>Hat numarası ve makine modeli (PF-8, DPH-70, MB-50)</td></tr>
+    <tr><td><strong>Ürün</strong></td><td>O hatta üretilen ürünün kodu ve adı</td></tr>
+    <tr><td><strong>Lot No</strong></td><td>Makinede kullanılan hammadde çuvalının lot numarası</td></tr>
+    <tr><td><strong>Saat</strong></td><td>Makinenin o gün çalıştırıldığı toplam süre</td></tr>
+    <tr><td><strong>Duruş</strong></td><td>Makinenin durduğu süre (saat). Kırmızı ile gösterilir.</td></tr>
+    <tr><td><strong>Kapasite</strong></td><td>Teorik maksimum üretim (formülle hesaplanır)</td></tr>
+    <tr><td><strong>Üretim</strong></td><td>Fiilen üretilen adet</td></tr>
+    <tr><td><strong>Verimlilik</strong></td><td>Üretim / Kapasite oranı. Renk kodlu gösterilir.</td></tr>
+    <tr><td><strong>Hammadde</strong></td><td>O gün tüketilen PET granül miktarı (kg)</td></tr>
+    <tr><td><strong>Not</strong></td><td>Arıza, kalıp değişimi, özel durum notları</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📊</span> Özet Kartlar</h2>
+  <table>
+    <tr><th>Kart</th><th>Açıklama</th></tr>
+    <tr><td><strong>Toplam Üretim</strong></td><td>Seçili günde tüm hatlardaki üretim toplamı</td></tr>
+    <tr><td><strong>Toplam Kapasite</strong></td><td>Tüm hatların teorik maksimum üretim toplamı</td></tr>
+    <tr><td><strong>Hammadde Tüketim</strong></td><td>Tüm hatlarda tüketilen toplam hammadde (kg)</td></tr>
+    <tr><td><strong>Toplam Duruş</strong></td><td>Tüm hatlardaki duruş sürelerinin toplamı (saat)</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 6: MAKİNE PERFORMANSI -->
+<div class="page page-break">
+  <h1 class="section">6. Makine Performansı</h1>
+  <div class="page-header">
+    <div class="icon">🏭</div>
+    <div>
+      <h3>Makine Performansı — Hat Detayları</h3>
+      <p>10 hattın anlık durumu ve tarihsel performansı.</p>
+    </div>
+  </div>
+
+  <p>Bu sayfa, makinelerden sorumlu üretim mühendisi veya bakım ekibi için tasarlanmıştır. Her hattın performansını görsel kartlarla hızlıca görmek ve seçilen hat için detaylı analiz yapmak mümkündür.</p>
+
+  <h2 class="sub"><span class="icon">🟢</span> Makine Kartları</h2>
+  <p>Sayfanın üstünde 10 hat için renkli kartlar görüntülenir. Her kartta:</p>
+  <table>
+    <tr><th>Bilgi</th><th>Açıklama</th></tr>
+    <tr><td><strong>Hat Adı & Model</strong></td><td>Hat 1 (PF-8) gibi</td></tr>
+    <tr><td><strong>Durum Noktası</strong></td><td>Sağ üst köşedeki renkli nokta: Yeşil=iyi, Sarı=dikkat, Kırmızı=sorun, Gri=duruyor</td></tr>
+    <tr><td><strong>Verimlilik %</strong></td><td>O günkü verimlilik yüzdesi, renk kodlu</td></tr>
+    <tr><td><strong>Duruş</strong></td><td>Varsa o günkü duruş süresi kırmızı ile gösterilir</td></tr>
+  </table>
+
+  <div class="info-box">
+    <p>💡 Bir makine kartına tıklandığında altında detay paneli açılır. Tekrar tıklanınca kapanır.</p>
+  </div>
+
+  <h2 class="sub"><span class="icon">📊</span> Detay Paneli</h2>
+  <p>Seçilen hat için şu bilgiler görüntülenir:</p>
+  <table>
+    <tr><th>Bölüm</th><th>İçerik</th></tr>
+    <tr><td><strong>KPI Kartları</strong></td><td>3 günlük toplam üretim, ortalama verimlilik, toplam duruş, hammadde tüketimi</td></tr>
+    <tr><td><strong>Verimlilik Trendi</strong></td><td>Son 3 günün verimlilik yüzdesi (çizgi grafik)</td></tr>
+    <tr><td><strong>Üretim Trendi</strong></td><td>Son 3 günün üretim adedi (bar grafik)</td></tr>
+    <tr><td><strong>Günlük Detay Tablosu</strong></td><td>Her günün tam üretim kaydı: ürün, lot no, cycle, çalışma/duruş saati, kapasite, üretim, verimlilik, hammadde, not</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 7: HAMMADDE -->
+<div class="page page-break">
+  <h1 class="section">7. Hammadde Yönetimi</h1>
+  <div class="page-header">
+    <div class="icon">📦</div>
+    <div>
+      <h3>Hammadde — Lot Takibi & Stok</h3>
+      <p>Hammadde girişleri, lot numaraları ve mevcut stok seviyeleri.</p>
+    </div>
+  </div>
+
+  <p>Fabrikaya gelen her hammadde çuvalı bu sayfaya kaydedilir. El terminali ile ilerleyen sistemde barkod okutulduğunda kayıt otomatik oluşacaktır.</p>
+
+  <h2 class="sub"><span class="icon">📊</span> Mevcut Stok Kartları</h2>
+  <p>Her hammadde türü için ayrı bir kart gösterilir. Kartta şunlar bulunur:</p>
+  <table>
+    <tr><th>Alan</th><th>Açıklama</th></tr>
+    <tr><td><strong>Hammadde Adı</strong></td><td>PET Granül – Şeffaf, Masterbatch – Mavi gibi</td></tr>
+    <tr><td><strong>Tedarikçi</strong></td><td>Hammaddenin geldiği firma adı</td></tr>
+    <tr><td><strong>Mevcut Stok</strong></td><td>Depodaki mevcut miktar (kg)</td></tr>
+    <tr><td><strong>Min. Stok</strong></td><td>Kritik eşik. Bu değerin altına düşünce kart kırmızıya döner ve "KRİTİK" uyarısı çıkar.</td></tr>
+    <tr><td><strong>Birim Fiyat</strong></td><td>₺/kg cinsinden hammadde fiyatı</td></tr>
+    <tr><td><strong>Stok Çubuğu</strong></td><td>Görsel doluluk göstergesi: Yeşil=yeterli, Sarı=azalıyor, Kırmızı=kritik</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📋</span> Giriş Kayıtları Tablosu</h2>
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>Lot No</strong></td><td>Gelen çuvalın benzersiz lot numarası (tedarikçi tarafından verilir)</td></tr>
+    <tr><td><strong>Hammadde</strong></td><td>Hammadde türü</td></tr>
+    <tr><td><strong>Tedarikçi</strong></td><td>Hammaddeyi satan firma</td></tr>
+    <tr><td><strong>Giriş Tarihi</strong></td><td>Çuvalın fabrikaya girdiği tarih</td></tr>
+    <tr><td><strong>Miktar (kg)</strong></td><td>Gelen çuvalın toplam ağırlığı</td></tr>
+    <tr><td><strong>Birim Fiyat</strong></td><td>O tarihte ödenen ₺/kg fiyatı</td></tr>
+    <tr><td><strong>Toplam Tutar</strong></td><td>Miktar × Birim Fiyat (₺)</td></tr>
+    <tr><td><strong>Açıklama</strong></td><td>Ek notlar (kaç çuval geldi, fiyat güncellemesi vb.)</td></tr>
+  </table>
+
+  <div class="warn-box">
+    <p>⚠️ PET Granül – Mavi stoku kritik eşiğin altına düşmüş durumdadır. Acil sipariş değerlendirilmelidir.</p>
+  </div>
+</div>
+
+<!-- BÖLÜM 8: ÜRÜN STOKU -->
+<div class="page page-break">
+  <h1 class="section">8. Ürün Stoku</h1>
+  <div class="page-header">
+    <div class="icon">🏗️</div>
+    <div>
+      <h3>Ürün Stoku — Güncel Seviyeler & Hareketler</h3>
+      <p>Her ürünün anlık stok durumu ve hareket geçmişi.</p>
+    </div>
+  </div>
+
+  <h2 class="sub"><span class="icon">📊</span> Güncel Stok Seviyeleri</h2>
+  <p>Her ürün için en güncel stok durumu gösterilir. Stok hareketi şu formüle göre hesaplanır:</p>
+  <code class="formula">Kapanış Stok = Açılış Stok + Üretim − Sevkiyat</code>
+
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>Ürün Kodu</strong></td><td>MM00.0412 formatında benzersiz ürün kodu</td></tr>
+    <tr><td><strong>Ürün Adı</strong></td><td>Tam ürün adı (hacim, marka, renk)</td></tr>
+    <tr><td><strong>Açılış Stok</strong></td><td>Günün başındaki stok miktarı</td></tr>
+    <tr><td><strong>Üretim (+)</strong></td><td>O gün üretilen adet (yeşil renk)</td></tr>
+    <tr><td><strong>Sevkiyat (−)</strong></td><td>O gün sevk edilen adet (kırmızı renk)</td></tr>
+    <tr><td><strong>Kalan Stok</strong></td><td>Günün sonundaki mevcut stok</td></tr>
+    <tr><td><strong>Son Güncelleme</strong></td><td>Bu ürün için son stok hareketi tarihi</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📜</span> Stok Hareket Geçmişi</h2>
+  <p>Alt tabloda tüm stok hareketleri kronolojik sırayla listelenir. Hangi günde ne kadar üretilip sevk edildiği buradan takip edilir.</p>
+</div>
+
+<!-- BÖLÜM 9: PALET TAKİBİ -->
+<div class="page page-break">
+  <h1 class="section">9. Palet Takibi</h1>
+  <div class="page-header">
+    <div class="icon">🎯</div>
+    <div>
+      <h3>Palet Takibi — Lot → Makine → Palet → Firma</h3>
+      <p>Tam izlenebilirlik zinciri: hammaddeden müşteriye.</p>
+    </div>
+  </div>
+
+  <p>Bu sayfa, izlenebilirlik açısından en kritik sayfadır. Herhangi bir şikayete karşı hangi lot hammaddeden üretildiği ve hangi firmaya gittiği saniyeler içinde bulunabilir.</p>
+
+  <h2 class="sub"><span class="icon">📋</span> Tablo Sütunları</h2>
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>Palet No</strong></td><td>Benzersiz palet numarası (örn: 000665/21)</td></tr>
+    <tr><td><strong>Parti No</strong></td><td>Bu paletin ait olduğu üretim partisi</td></tr>
+    <tr><td><strong>Ürün</strong></td><td>Paletteki ürünün kodu ve adı</td></tr>
+    <tr><td><strong>Lot No (Hammadde)</strong></td><td>Bu ürünü üretmek için kullanılan hammadde çuvalının lot numarası</td></tr>
+    <tr><td><strong>Makine</strong></td><td>Üretimin yapıldığı hat</td></tr>
+    <tr><td><strong>Üretim Tarihi</strong></td><td>Paletin üretildiği tarih</td></tr>
+    <tr><td><strong>Adet</strong></td><td>Paletteki toplam şişe sayısı</td></tr>
+    <tr><td><strong>Tava İçi</strong></td><td>Her kattaki / taşıyıcıdaki şişe adedi</td></tr>
+    <tr><td><strong>Firma</strong></td><td>Paletin gideceği veya gittiği müşteri firması</td></tr>
+    <tr><td><strong>Durum</strong></td><td>Stokta / Sevk Edildi / Beklemede</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">🚦</span> Palet Durumları</h2>
+  <table>
+    <tr><th>Durum</th><th>Anlam</th></tr>
+    <tr><td><span class="badge-green">Stokta</span></td><td>Palet depoda bekliyor, henüz sevk edilmedi</td></tr>
+    <tr><td><span class="badge-gray">Sevk Edildi</span></td><td>Palet müşteriye gönderildi</td></tr>
+    <tr><td><span class="badge-yellow">Beklemede</span></td><td>Palet hazır ama sevkiyat bekliyor</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 10: SEVKİYAT -->
+<div class="page page-break">
+  <h1 class="section">10. Sevkiyat</h1>
+  <div class="page-header">
+    <div class="icon">🚚</div>
+    <div>
+      <h3>Sevkiyat — İrsaliye Bazlı Takip</h3>
+      <p>Tüm sevkiyatlar, nakliyeci ve araç bilgileriyle takip edilir.</p>
+    </div>
+  </div>
+
+  <h2 class="sub"><span class="icon">📊</span> Özet Kartlar</h2>
+  <table>
+    <tr><th>Kart</th><th>Açıklama</th></tr>
+    <tr><td><strong>Toplam Sevkiyat</strong></td><td>Sistemdeki toplam irsaliye sayısı</td></tr>
+    <tr><td><strong>Toplam Adet</strong></td><td>Tüm irsaliyelerdeki toplam ürün adedi</td></tr>
+    <tr><td><strong>Toplam Palet</strong></td><td>Sevk edilen toplam palet sayısı</td></tr>
+    <tr><td><strong>Teslim Edildi</strong></td><td>Teslim edilen / toplam irsaliye oranı</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📋</span> Sevkiyat Tablosu</h2>
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>İrsaliye No</strong></td><td>Sevkiyat belgesi numarası (örn: IRŞ-2026-0412)</td></tr>
+    <tr><td><strong>Tarih</strong></td><td>Sevkiyatın gerçekleştiği veya planlandığı tarih</td></tr>
+    <tr><td><strong>Firma</strong></td><td>Müşteri firma adı</td></tr>
+    <tr><td><strong>Ürün</strong></td><td>Sevk edilen ürünün kodu ve adı</td></tr>
+    <tr><td><strong>Parti No</strong></td><td>Sevk edilen ürünlerin ait olduğu üretim partisi</td></tr>
+    <tr><td><strong>Adet</strong></td><td>Sevk edilen toplam ürün adedi</td></tr>
+    <tr><td><strong>Palet</strong></td><td>Kaç palet yüklendiği</td></tr>
+    <tr><td><strong>Nakliyeci</strong></td><td>Taşıma yapan kargo/lojistik firması</td></tr>
+    <tr><td><strong>Plaka</strong></td><td>Taşıma aracının plakası</td></tr>
+    <tr><td><strong>Durum</strong></td><td>Teslim Edildi / Yolda / Hazırlanıyor</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">🚦</span> Sevkiyat Durumları</h2>
+  <table>
+    <tr><th>Durum</th><th>Anlam</th></tr>
+    <tr><td><span class="badge-green">Teslim Edildi</span></td><td>Ürünler müşteriye ulaştı</td></tr>
+    <tr><td><span class="badge-blue">Yolda</span></td><td>Araç yola çıktı, teslim edilmedi</td></tr>
+    <tr><td><span class="badge-yellow">Hazırlanıyor</span></td><td>Yükleme yapılıyor veya bekliyor</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 11: FİRMA ANALİZİ -->
+<div class="page page-break">
+  <h1 class="section">11. Firma Analizi</h1>
+  <div class="page-header">
+    <div class="icon">🏢</div>
+    <div>
+      <h3>Firma Analizi — Müşteri Bazlı Raporlar</h3>
+      <p>Müşteri firmaların sevkiyat ve ciro analizleri.</p>
+    </div>
+  </div>
+
+  <h2 class="sub"><span class="icon">📊</span> Grafikler</h2>
+  <table>
+    <tr><th>Grafik</th><th>Açıklama</th></tr>
+    <tr><td><strong>Sevkiyat Dağılımı (Pasta)</strong></td><td>Her firmanın toplam sevkiyat içindeki yüzde payı</td></tr>
+    <tr><td><strong>Firma Bazlı Tutar (Bar)</strong></td><td>Her firmanın toplam satış tutarı (₺)</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📋</span> Firma Tablosu</h2>
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>Firma</strong></td><td>Müşteri firma adı</td></tr>
+    <tr><td><strong>Sektör</strong></td><td>Firmanın faaliyet alanı</td></tr>
+    <tr><td><strong>Şehir</strong></td><td>Firmanın bulunduğu şehir</td></tr>
+    <tr><td><strong>Yetkili</strong></td><td>İletişim kurulacak kişi adı</td></tr>
+    <tr><td><strong>İrsaliye</strong></td><td>Bu firmaya yapılan toplam sevkiyat sayısı</td></tr>
+    <tr><td><strong>Toplam Adet</strong></td><td>Tüm zamanların toplam sevkiyat adedi</td></tr>
+    <tr><td><strong>Toplam Tutar</strong></td><td>Toplam satış tutarı (₺)</td></tr>
+    <tr><td><strong>Son Sevkiyat</strong></td><td>Bu firmaya yapılan en son sevkiyat tarihi</td></tr>
+    <tr><td><strong>Durum</strong></td><td>Aktif / Pasif</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 12: ARIZA & DURUŞ -->
+<div class="page page-break">
+  <h1 class="section">12. Arıza & Duruş Takibi</h1>
+  <div class="page-header">
+    <div class="icon">🔧</div>
+    <div>
+      <h3>Arıza & Duruş — Kayıp Analizi</h3>
+      <p>Makinelerin duruş nedenleri, süreleri ve üretim kayıpları.</p>
+    </div>
+  </div>
+
+  <p>Bu sayfa bakım mühendisi ve üretim müdürü için tasarlanmıştır. Hangi makinenin ne sıklıkla, hangi nedenlerle durduğu analiz edilerek önleyici bakım planlanabilir.</p>
+
+  <h2 class="sub"><span class="icon">🃏</span> Özet Kartlar</h2>
+  <table>
+    <tr><th>Kart</th><th>Açıklama</th></tr>
+    <tr><td><strong>Toplam Duruş (3 Gün)</strong></td><td>Son 3 günde tüm hatlardaki toplam duruş süresi</td></tr>
+    <tr><td><strong>Arızalı Olay</strong></td><td>Duruş notu bulunan kayıt sayısı</td></tr>
+    <tr><td><strong>Etkilenen Hat</strong></td><td>Duruş yaşayan farklı hat sayısı</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📊</span> Grafikler</h2>
+  <table>
+    <tr><th>Grafik</th><th>Açıklama</th></tr>
+    <tr><td><strong>Hat Bazlı Toplam Duruş</strong></td><td>Her hattın 3 günlük toplam duruş süresi (kırmızı bar)</td></tr>
+    <tr><td><strong>Günlük Toplam Duruş</strong></td><td>Her günün toplam duruş süresi trendi (sarı bar)</td></tr>
+  </table>
+
+  <h2 class="sub"><span class="icon">📋</span> Arıza Kayıtları Tablosu</h2>
+  <table>
+    <tr><th>Sütun</th><th>Açıklama</th></tr>
+    <tr><td><strong>Tarih</strong></td><td>Arızanın yaşandığı tarih</td></tr>
+    <tr><td><strong>Makine</strong></td><td>Etkilenen hat ve model</td></tr>
+    <tr><td><strong>Ürün</strong></td><td>O sırada üretilmekte olan ürün</td></tr>
+    <tr><td><strong>Duruş (Saat)</strong></td><td>Toplam duruş süresi, kırmızı ile vurgulanır</td></tr>
+    <tr><td><strong>Üretim Kaybı</strong></td><td>Duruş nedeniyle kaçırılan teorik üretim adedi</td></tr>
+    <tr><td><strong>Açıklama</strong></td><td>Arıza veya duruş nedeni (örn: "Piston Keçe Arızası")</td></tr>
+  </table>
+</div>
+
+<!-- BÖLÜM 13: MAKİNE LİSTESİ -->
+<div class="page page-break">
+  <h1 class="section">13. Makine Listesi</h1>
+
+  <table>
+    <tr><th>Hat</th><th>Model</th><th>Özellik</th></tr>
+    <tr><td><strong>Hat 1</strong></td><td>PF-8</td><td>8 gözlü kalıp, yüksek hız</td></tr>
+    <tr><td><strong>Hat 2</strong></td><td>PF-8</td><td>8 gözlü kalıp, yüksek hız</td></tr>
+    <tr><td><strong>Hat 3</strong></td><td>PF-8</td><td>8 gözlü kalıp, yüksek hız</td></tr>
+    <tr><td><strong>Hat 4</strong></td><td>DPH-70</td><td>6 gözlü kalıp, büyük hacim</td></tr>
+    <tr><td><strong>Hat 5</strong></td><td>DPH-70</td><td>3–6 gözlü kalıp, esnek</td></tr>
+    <tr><td><strong>Hat 6</strong></td><td>DPH-70</td><td>4–6 gözlü kalıp</td></tr>
+    <tr><td><strong>Hat 7</strong></td><td>MB-50</td><td>Orta kapasite, çok amaçlı</td></tr>
+    <tr><td><strong>Hat 8</strong></td><td>DPH-70</td><td>5 gözlü kalıp</td></tr>
+    <tr><td><strong>Hat 9</strong></td><td>DPH-70</td><td>4 gözlü kalıp</td></tr>
+    <tr><td><strong>Hat 10</strong></td><td>DPH-70</td><td>5 gözlü kalıp</td></tr>
+  </table>
+
+  <h1 class="section" style="margin-top:40px;">14. Ürün Kataloğu</h1>
+
+  <table>
+    <tr><th>Ürün Kodu</th><th>Ürün Adı</th><th>Gramaj</th><th>Göz</th><th>Cycle (sn)</th></tr>
+    <tr><td>MM00.0412</td><td>750 ML DESTO SIVI BULAŞIK DETERJANI - ŞEFFAF</td><td>32 g</td><td>8</td><td>16.4</td></tr>
+    <tr><td>MM00.0411</td><td>750 ML DESTO SIVI BULAŞIK DETERJANI - MAVİ</td><td>32 g</td><td>8</td><td>17.4</td></tr>
+    <tr><td>MM02.0101</td><td>450 ML PARLATICI - PET - MAVİ</td><td>29 g</td><td>8</td><td>15.0</td></tr>
+    <tr><td>MM00.1120</td><td>1,5 LT YÜZEY TEMİZLEYİCİ - PET - AKS</td><td>65 g</td><td>6</td><td>15.9</td></tr>
+    <tr><td>MM02.0811</td><td>2,5 LT YÜZEY TEMİZLEYİCİ DOA - 80 GR</td><td>80 g</td><td>3</td><td>21.0</td></tr>
+    <tr><td>MM00.0136</td><td>1 LT ELBOW YÜZEY-RTU - YENİ ŞİŞE</td><td>44 g</td><td>4</td><td>19.0</td></tr>
+    <tr><td>MM02.0021</td><td>1 LT SIVI BULAŞIK SÜNGERLİ - ŞEFFAF</td><td>40 g</td><td>5</td><td>18.0</td></tr>
+    <tr><td>MM00.0634</td><td>1,5 LT BULUT KONS.YUM.PET-ŞEFFAF</td><td>59 g</td><td>4</td><td>14.9</td></tr>
+    <tr><td>MM02.0212</td><td>1000 ML DOA ŞEFFAF YÜZEY TEM. - PET</td><td>40 g</td><td>5</td><td>13.9</td></tr>
+    <tr><td>MM02.0300</td><td>739 ML EXTRA SIVI BULAŞIK ŞİŞE - ŞEFFAF</td><td>40 g</td><td>5</td><td>13.95</td></tr>
+  </table>
+
+  <footer>
+    <p>Enpack Plastik — Üretim İzlenebilirlik Sistemi v1.0 — Demo Dokümanı — Nisan 2026</p>
+    <p style="margin-top:4px;">Bu doküman demo sisteme aittir. Gerçek üretim sistemine entegrasyon sonrası güncellenecektir.</p>
+  </footer>
+</div>
+
+</body>
+</html>
