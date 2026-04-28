@@ -34,7 +34,7 @@ export default function PaletlerPage() {
         </div>
       </div>
 
-      <div className="bg-gray-800 rounded-xl overflow-hidden">
+      <div className="bg-gray-800 rounded-xl overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-700">

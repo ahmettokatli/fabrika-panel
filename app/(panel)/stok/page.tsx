@@ -44,7 +44,7 @@ export default function StokPage() {
       </div>
 
       {/* Güncel Stok */}
-      <div className="bg-gray-800 rounded-xl overflow-hidden mb-8">
+      <div className="bg-gray-800 rounded-xl overflow-x-auto mb-8">
         <div className="px-6 py-4 border-b border-gray-700">
           <h3 className="text-white font-semibold">Güncel Stok Seviyeleri</h3>
         </div>
@@ -77,7 +77,7 @@ export default function StokPage() {
       </div>
 
       {/* Hareket Geçmişi */}
-      <div className="bg-gray-800 rounded-xl overflow-hidden">
+      <div className="bg-gray-800 rounded-xl overflow-x-auto">
         <div className="px-6 py-4 border-b border-gray-700">
           <h3 className="text-white font-semibold">Stok Hareket Geçmişi</h3>
         </div>

@@ -51,7 +51,7 @@ export default function HammaddePage() {
       {/* Giriş Kayıtları */}
       <div>
         <h3 className="text-white font-semibold mb-4">Hammadde Giriş Kayıtları</h3>
-        <div className="bg-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-gray-800 rounded-xl overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-700">
