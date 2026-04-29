@@ -48,7 +48,7 @@ export default function MakinelerPage() {
     : 0;
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-white">Makine Performansı</h2>
         <p className="text-gray-400 text-sm">Hat bazlı performans ve verimlilik takibi</p>
@@ -122,7 +122,7 @@ export default function MakinelerPage() {
           </div>
 
           {/* KPI'lar */}
-          <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
             <div className="bg-gray-800 rounded-xl p-4 border-l-4 border-blue-600">
               <p className="text-gray-400 text-xs mb-1">Toplam Üretim (3 gün)</p>
               <p className="text-white text-xl font-bold">{toplamUretim.toLocaleString()}</p>

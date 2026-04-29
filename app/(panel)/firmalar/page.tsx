@@ -23,7 +23,7 @@ export default function FirmalarPage() {
   }));
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-white">Firma Analizi</h2>
         <p className="text-gray-400 text-sm">Müşteri bazlı sevkiyat ve ciro analizi</p>

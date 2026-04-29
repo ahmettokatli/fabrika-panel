@@ -37,7 +37,7 @@ export default function StokPage() {
   const hareketler = [...stockRecords].sort((a, b) => b.tarih.localeCompare(a.tarih));
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-white">Ürün Stoku</h2>
         <p className="text-gray-400 text-sm">Güncel stok seviyeleri ve hareket geçmişi</p>

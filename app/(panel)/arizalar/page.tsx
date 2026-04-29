@@ -25,7 +25,7 @@ export default function ArizalarPage() {
   }));
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-white">Arıza & Duruş Takibi</h2>
         <p className="text-gray-400 text-sm">Hat bazlı arıza ve duruş kayıtları</p>

@@ -45,21 +45,21 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-white">Dashboard</h2>
         <p className="text-gray-400 text-sm">23 Nisan 2026 — Günlük Özet</p>
       </div>
 
       {/* KPI Kartları */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
         <StatCard label="Toplam Üretim" value={totalUretim.toLocaleString()} unit="adet" color="blue" icon="⚙️" />
         <StatCard label="Hammadde Tüketim" value={Math.round(totalHammadde).toLocaleString()} unit="kg" color="purple" icon="📦" />
         <StatCard label="Ort. Verimlilik" value={(avgVerimlilik * 100).toFixed(1)} unit="%" color={avgVerimlilik >= 0.95 ? 'green' : 'yellow'} icon="📈" />
         <StatCard label="Toplam Duruş" value={totalDurus.toString()} unit="saat" color={totalDurus > 10 ? 'red' : 'green'} icon="⏸️" />
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
         <StatCard label="Bugün Sevkiyat" value={totalSevk.toLocaleString()} unit="adet" color="blue" icon="🚚" />
         <StatCard label="Aktif Hat" value={todayProduction.filter(r => r.uretim > 0).length.toString()} unit="/ 10 hat" color="green" icon="🏭" />
         <StatCard label="Kritik Stok" value={kritikStok.length.toString()} unit="hammadde" color={kritikStok.length > 0 ? 'red' : 'green'} icon="⚠️" />
@@ -67,7 +67,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Grafikler */}
-      <div className="grid grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
         <div className="bg-gray-800 rounded-xl p-6">
           <h3 className="text-white font-semibold mb-4">Günlük Üretim Trendi</h3>
           <ResponsiveContainer width="100%" height={220}>
@@ -95,7 +95,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {/* Stok Durumu */}
         <div className="bg-gray-800 rounded-xl p-6">
           <h3 className="text-white font-semibold mb-4">Ürün Stok Durumu</h3>
@@ -155,12 +155,12 @@ function StatCard({ label, value, unit, color, icon }: { label: string; value: s
     purple: 'border-purple-600 bg-purple-900/20',
   };
   return (
-    <div className={`bg-gray-800 rounded-xl p-5 border-l-4 ${colors[color]}`}>
-      <div className="flex items-center justify-between mb-2">
-        <p className="text-gray-400 text-xs font-medium">{label}</p>
-        <span className="text-xl">{icon}</span>
+    <div className={`bg-gray-800 rounded-xl p-3 md:p-5 border-l-4 ${colors[color]}`}>
+      <div className="flex items-center justify-between mb-1 md:mb-2">
+        <p className="text-gray-400 text-xs font-medium leading-tight">{label}</p>
+        <span className="text-base md:text-xl">{icon}</span>
       </div>
-      <p className="text-white text-2xl font-bold">{value}</p>
+      <p className="text-white text-xl md:text-2xl font-bold truncate">{value}</p>
       <p className="text-gray-500 text-xs">{unit}</p>
     </div>
   );

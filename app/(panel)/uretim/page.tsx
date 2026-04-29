@@ -15,7 +15,7 @@ export default function UretimPage() {
   const totalDurus = records.reduce((s, r) => s + r.durusSaat, 0);
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold text-white">Günlük Üretim</h2>
@@ -35,7 +35,7 @@ export default function UretimPage() {
       </div>
 
       {/* Özet */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-gray-800 rounded-xl p-4 border-l-4 border-blue-600">
           <p className="text-gray-400 text-xs mb-1">Toplam Üretim</p>
           <p className="text-white text-xl font-bold">{totalUretim.toLocaleString()}</p>

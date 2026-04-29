@@ -10,7 +10,7 @@ const statusColors: Record<string, string> = {
 
 export default function PaletlerPage() {
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-white">Palet Takibi</h2>
         <p className="text-gray-400 text-sm">Parti ve palet bazlı izlenebilirlik — Lot → Makine → Palet → Firma</p>

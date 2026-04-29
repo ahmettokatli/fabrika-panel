@@ -85,7 +85,7 @@ export default function IsEmirleriPage() {
   const geciken = orders.filter(o => o.durum !== 'tamamlandı' && o.durum !== 'iptal' && o.teslimTarihi < '2026-04-27').length;
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold text-white">İş Emirleri</h2>
@@ -100,7 +100,7 @@ export default function IsEmirleriPage() {
       </div>
 
       {/* Özet kartlar */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
         <div className="bg-gray-800 rounded-xl p-4 border-l-4 border-blue-600">
           <p className="text-gray-400 text-xs mb-1">Üretimde</p>
           <p className="text-white text-2xl font-bold">{aktif}</p>
